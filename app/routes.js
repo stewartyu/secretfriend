@@ -7,12 +7,14 @@ import Character from './components/Character';
 import CharacterList from './components/CharacterList';
 import Stats from './components/Stats';
 import AddAccount from './components/AddAccount';
+import Signin from './components/Signin';
 
 export default (
   <Route component={App}>
     <Route path='/' component={Home} />
     <Route path='/add' component={AddCharacter} />
     <Route path='/auth/register' component={AddAccount} />
+    <Route path='/auth/signin' component={Signin} />
     <Route path='/characters/:id' component={Character} />
     <Route path='/shame' component={CharacterList} />
     <Route path='/stats' component={Stats} />
