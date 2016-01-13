@@ -1,10 +1,10 @@
 import alt from '../alt';
 
-class AddAccountActions {
+class SignupActions {
   constructor() {
     this.generateActions(
-      'addAccountSuccess',
-      'addAccountFail',
+      'signupSuccess',
+      'signupFail',
       'updateEmail',
       'updatePassword',
       'invalidEmail',
@@ -12,7 +12,7 @@ class AddAccountActions {
     );
   }
 
-  addAccount(email, password) {
+  signup(email, password) {
     $.ajax({
       type: 'POST',
       url: '/api/user/register',
@@ -20,12 +20,12 @@ class AddAccountActions {
       data: { email: email, password: password }
     })
       .done((data) => {
-        this.actions.addAccountSuccess(data.message);
+        this.actions.signupSuccess(data.message);
       })
       .fail((jqXhr) => {
-        this.actions.addAccountFail(jqXhr.responseJSON.message);
+        this.actions.signupFail(jqXhr.responseJSON.message);
       });
   }
 }
 
-export default alt.createActions(AddAccountActions);
+export default alt.createActions(SignupActions);

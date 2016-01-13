@@ -9,17 +9,17 @@ passport.use(new Strategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-router.get('/auth/register', function(req, res) {
+router.get('/auth/signup', function(req, res) {
     res.render('index', { html: '', user: req.user });
 });
 
-router.post('/auth/register', function(req, res) {
+router.post('/auth/signup', function(req, res) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
-            return res.render('register', { account : account });
+            return res.render('index', { account : account });
         }
         passport.authenticate('local')(req, res, function () {
-            res.render('index', { html: '', user: req.user });
+            res.redirect('/');
         });
     });
 });

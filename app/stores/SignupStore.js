@@ -1,9 +1,9 @@
 import alt from '../alt';
-import AddAccountActions from '../actions/AddAccountActions';
+import SignupActions from '../actions/SignupActions';
 
-class AddAccountStore {
+class SignupStore {
   constructor() {
-    this.bindActions(AddAccountActions);
+    this.bindActions(SignupActions);
     this.email = '';
     this.password = '';
     this.helpBlock = '';
@@ -11,12 +11,12 @@ class AddAccountStore {
     this.passwordValidationState = '';
   }
 
-  onAddAccountSuccess(successMessage) {
+  onSignupSuccess(successMessage) {
     this.emailValidationState = 'has-success';
     this.helpBlock = successMessage;
   }
 
-  onAddAccountFail(errorMessage) {
+  onSignupFail(errorMessage) {
     this.emailValidationState = 'has-error';
     this.helpBlock = errorMessage;
   }
@@ -42,4 +42,4 @@ class AddAccountStore {
   }
 }
 
-export default alt.createStore(AddAccountStore);
+export default alt.createStore(SignupStore);

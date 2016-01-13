@@ -1,20 +1,20 @@
 import React from 'react';
-import AddAccountStore from '../stores/AddAccountStore';
-import AddAccountActions from '../actions/AddAccountActions';
+import SignupStore from '../stores/SignupStore';
+import SignupActions from '../actions/SignupActions';
 
-class AddAccount extends React.Component {
+class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = AddAccountStore.getState();
+    this.state = SignupStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    AddAccountStore.listen(this.onChange);
+    SignupStore.listen(this.onChange);
   }
 
   componentWillUnmount() {
-    AddAccountStore.unlisten(this.onChange);
+    SignupStore.unlisten(this.onChange);
   }
 
   onChange(state) {
@@ -28,16 +28,16 @@ class AddAccount extends React.Component {
     var password = this.state.password;
 
     if (!email) {
-      AddAccountActions.invalidEmail();
+      SignupActions.invalidEmail();
       this.refs.emailTextField.getDOMNode().focus();
     }
 
     if (!password) {
-      AddAccountActions.invalidPassword();
+      SignupActions.invalidPassword();
     }
 
     if (email && password) {
-      AddAccountActions.addAccount(email, password);
+      SignupActions.addAccount(email, password);
     }
   }
 
@@ -47,19 +47,19 @@ class AddAccount extends React.Component {
         <div className='row flipInX animated'>
           <div className='col-sm-8'>
             <div className='panel panel-default'>
-              <div className='panel-heading'>Register</div>
+              <div className='panel-heading'>Sign Up</div>
               <div className='panel-body'>
-                <form action='/auth/register' method='post'>
+                <form action='/auth/signup' method='post'>
                   <div className={'form-group ' + this.state.nameValidationState}>
                     <label className='control-label'>Email</label>
                     <input type='text' name='username' className='form-control' ref='emailTextField' value={this.state.email}
-                        onChange={AddAccountActions.updateEmail} autoFocus/>
+                        onChange={SignupActions.updateEmail} autoFocus/>
                     <span className='help-block'>{this.state.helpBlock}</span>
                   </div>
                   <div className={'form-group ' + this.state.passwordValidationState}>
                     <label className='control-label'>Password</label>
                     <input type='password' name='password' className='form-control' ref='passwordTextField' value={this.state.password}
-                           onChange={AddAccountActions.updatePassword} autoFocus/>
+                           onChange={SignupActions.updatePassword} autoFocus/>
                   </div>
                   <button type='submit' className='btn btn-primary'>Submit</button>
                 </form>
@@ -72,4 +72,4 @@ class AddAccount extends React.Component {
   }
 }
 
-export default AddAccount;
+export default Signup;
