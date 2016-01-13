@@ -33,7 +33,8 @@ var app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
+app.set('view engine', 'html');
+app.engine('html', swig.renderFile);
 app.engine('jsx', require('express-react-views').createEngine());
 app.use(logger('dev'));
 app.use(bodyParser.json());
