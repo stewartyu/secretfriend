@@ -10,13 +10,13 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 router.get('/auth/signup', function(req, res) {
-    res.render('index', { html: '', user: req.user });
+    res.render('index', { html: '', user: req.session.passport.user });
 });
 
 router.post('/auth/signup', function(req, res) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
-            return res.render('index', { account : account });
+            return res.render('index', { error : err });
         }
         passport.authenticate('local')(req, res, function () {
             res.redirect('/');
@@ -25,7 +25,7 @@ router.post('/auth/signup', function(req, res) {
 });
 
 router.get('/auth/signin', function(req, res) {
-    res.render('index', { user : req.user });
+    res.render('index', { user : req.session.passport.user });
 });
 
 router.post('/auth/signin', passport.authenticate('local'), function(req, res) {

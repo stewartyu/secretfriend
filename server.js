@@ -59,6 +59,7 @@ app.use(function(req, res) {
       res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       var html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
+      console.log(req.session);
       var page = swig.renderFile('views/index.html', { html: html, user: req.session.passport.user });
       res.status(200).send(page);
     } else {
