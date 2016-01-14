@@ -13,7 +13,7 @@ class SignupStore {
 
   onSignupSuccess(successMessage) {
     this.emailValidationState = 'has-success';
-    this.helpBlock = successMessage;
+    this.helpBlock = 'You have signed up!';
   }
 
   onSignupFail(errorMessage) {

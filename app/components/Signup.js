@@ -37,7 +37,7 @@ class Signup extends React.Component {
     }
 
     if (email && password) {
-      SignupActions.addAccount(email, password);
+      SignupActions.signup(email, password);
     }
   }
 
@@ -49,8 +49,8 @@ class Signup extends React.Component {
             <div className='panel panel-default'>
               <div className='panel-heading'>Sign Up</div>
               <div className='panel-body'>
-                <form action='/auth/signup' method='post'>
-                  <div className={'form-group ' + this.state.nameValidationState}>
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                  <div className={'form-group ' + this.state.emailValidationState}>
                     <label className='control-label'>Email</label>
                     <input type='text' name='username' className='form-control' ref='emailTextField' value={this.state.email}
                         onChange={SignupActions.updateEmail} autoFocus/>

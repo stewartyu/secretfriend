@@ -15,9 +15,9 @@ class SignupActions {
   signup(email, password) {
     $.ajax({
       type: 'POST',
-      url: '/api/user/register',
+      url: '/auth/signup',
       headers: {"Authorization": "Basic " + btoa(encodeURIComponent(escape(email + password)))},
-      data: { email: email, password: password }
+      data: { username: email, password: password }
     })
       .done((data) => {
         this.actions.signupSuccess(data.message);
