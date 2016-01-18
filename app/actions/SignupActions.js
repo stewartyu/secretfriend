@@ -20,7 +20,12 @@ class SignupActions {
       data: { username: email, password: password }
     })
       .done((data) => {
-        this.actions.signupSuccess(data.message);
+          if (data.error) {
+              this.actions.signupFail(data.error);
+          }
+          else {
+              this.actions.signupSuccess(data);
+          }
       })
       .fail((jqXhr) => {
         this.actions.signupFail(jqXhr.responseJSON.message);

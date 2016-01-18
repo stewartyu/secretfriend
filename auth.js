@@ -14,12 +14,18 @@ router.get('/auth/signup', function(req, res) {
 });
 
 router.post('/auth/signup', function(req, res) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-        if (err) {
-            return res.render('index', { error : err });
+    Account.findOne({ username: req.body.username }, function(err, account) {
+        if (account) {
+            return res.send({ error: 'There is already a user with this name.' });
         }
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+
+        Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+            if (err) {
+                return res.render('index', { error : err });
+            }
+            passport.authenticate('local')(req, res, function () {
+                res.send(req.session.passport.user);
+            });
         });
     });
 });
@@ -35,6 +41,11 @@ router.post('/auth/signin', passport.authenticate('local'), function(req, res) {
 router.get('/auth/signout', function(req, res) {
     req.logout();
     res.redirect('/');
+});
+
+router.get('/auth/me', function(req, res) {
+    var user = req.session.passport.user || {};
+    res.send(user);
 });
 
 module.exports = router;

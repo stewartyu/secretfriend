@@ -1,41 +1,24 @@
 import alt from '../alt';
-import {assign} from 'underscore';
 
 class NavbarActions {
   constructor() {
     this.generateActions(
-      'updateOnlineUsers',
-      'updateAjaxAnimation',
-      'updateSearchQuery',
-      'getCharacterCountSuccess',
-      'getCharacterCountFail',
-      'findCharacterSuccess',
-      'findCharacterFail'
+      'getMeSuccess',
+      'getMeFail',
+      'signupSuccess'
     );
   }
 
-  findCharacter(payload) {
-    $.ajax({
-      url: '/api/characters/search',
-      data: { name: payload.searchQuery }
-    })
+  signupSuccess(data) {
+      console.log('signupSucces: ' + data);
+      this.actions.getMeSuccess(data);
+    /*$.ajax({ url: '/auth/me' })
       .done((data) => {
-        assign(payload, data);
-        this.actions.findCharacterSuccess(payload);
-      })
-      .fail(() => {
-        this.actions.findCharacterFail(payload);
-      });
-  }
-
-  getCharacterCount() {
-    $.ajax({ url: '/api/characters/count' })
-      .done((data) => {
-        this.actions.getCharacterCountSuccess(data)
+        this.actions.getMeSuccess(data)
       })
       .fail((jqXhr) => {
-        this.actions.getCharacterCountFail(jqXhr)
-      });
+        this.actions.getMeFail(jqXhr)
+    });*/
   }
 }
 
