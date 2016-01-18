@@ -37,11 +37,17 @@ class Navbar extends React.Component {
     }
   }
 
+  handleSignout(event) {
+    event.preventDefault();
+
+    NavbarActions.signout();
+  }
+
   render() {
-      var user = <div><Link to="/auth/signin">Sign In</Link> <Link to="/auth/signup">Sign Up</Link></div>;
-      if (this.state.me) {
-          user = <div>Logged in as <span>{this.state.me}<Link to="/auth/signout">Sign Out</Link></span></div>;
-      }
+    var user = <div><Link to="/auth/signin">Sign In</Link> <Link to="/auth/signup">Sign Up</Link></div>;
+    if (this.state.me) {
+      user = <div>Logged in as <span>{this.state.me}<Link to="/auth/signout" onClick={this.handleSignout}>Sign Out</Link></span></div>;
+    }
     return (
       <nav className='navbar navbar-default navbar-static-top'>
         <div className='navbar-header'>

@@ -37,7 +37,7 @@ class Signin extends React.Component {
     }
 
     if (email && password) {
-      SigninActions.Signin(email, password);
+      SigninActions.signin(email, password);
     }
   }
 
@@ -49,7 +49,7 @@ class Signin extends React.Component {
             <div className='panel panel-default'>
               <div className='panel-heading'>Signin</div>
               <div className='panel-body'>
-                <form action='/auth/signin' method='post'>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                   <div className={'form-group ' + this.state.nameValidationState}>
                     <label className='control-label'>Email</label>
                     <input type='text' name='username' className='form-control' ref='emailTextField' value={this.state.email}

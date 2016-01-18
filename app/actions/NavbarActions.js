@@ -4,7 +4,8 @@ class NavbarActions {
   constructor() {
     this.generateActions(
       'getMeSuccess',
-      'getMeFail'
+      'getMeFail',
+      'signoutSuccess'
     );
   }
 
@@ -16,6 +17,13 @@ class NavbarActions {
       .fail((jqXhr) => {
         this.actions.getMeFail(jqXhr)
     });
+  }
+
+  signout() {
+      $.ajax({ url: '/auth/signout' })
+        .done((data) => {
+          this.actions.signoutSuccess(data);
+        });
   }
 }
 

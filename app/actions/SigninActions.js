@@ -3,8 +3,8 @@ import alt from '../alt';
 class SigninActions {
   constructor() {
     this.generateActions(
-      'SigninSuccess',
-      'SigninFail',
+      'signinSuccess',
+      'signinFail',
       'updateEmail',
       'updatePassword',
       'invalidEmail',
@@ -12,18 +12,18 @@ class SigninActions {
     );
   }
 
-  Signin(email, password) {
+  signin(email, password) {
     $.ajax({
       type: 'POST',
-      url: '/api/user/register',
+      url: '/auth/signin',
       headers: {"Authorization": "Basic " + btoa(encodeURIComponent(escape(email + password)))},
-      data: { email: email, password: password }
+      data: { username: email, password: password }
     })
       .done((data) => {
-        this.actions.SigninSuccess(data.message);
+        this.actions.signinSuccess(data);
       })
       .fail((jqXhr) => {
-        this.actions.SigninFail(jqXhr.responseJSON.message);
+        this.actions.signinFail(jqXhr.responseJSON.message);
       });
   }
 }
