@@ -4,21 +4,18 @@ class NavbarActions {
   constructor() {
     this.generateActions(
       'getMeSuccess',
-      'getMeFail',
-      'signupSuccess'
+      'getMeFail'
     );
   }
 
-  signupSuccess(data) {
-      console.log('signupSucces: ' + data);
-      this.actions.getMeSuccess(data);
-    /*$.ajax({ url: '/auth/me' })
+  getMe(data) {
+    $.ajax({ url: '/auth/me' })
       .done((data) => {
         this.actions.getMeSuccess(data)
       })
       .fail((jqXhr) => {
         this.actions.getMeFail(jqXhr)
-    });*/
+    });
   }
 }
 

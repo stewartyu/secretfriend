@@ -1,19 +1,20 @@
 import alt from '../alt';
+import SignupActions from '../actions/SignupActions';
 import NavbarActions from '../actions/NavbarActions';
 
 class NavbarStore {
   constructor() {
+    this.bindActions(SignupActions);
     this.bindActions(NavbarActions);
     this.me = '';
   }
 
-  onGetMeSuccess(data) {
-      console.log('onGetMeSuccess: ' + data);
-    this.me = data;
+  onSignupSuccess(me) {
+    this.me = me;
   }
 
-  onGetMeFail(jqXhr) {
-    toastr.error(jqXhr.responseJSON.message);
+  getMeSuccess(me) {
+    this.me = me;
   }
 }
 

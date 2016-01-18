@@ -12,6 +12,7 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     NavbarStore.listen(this.onChange);
+    NavbarActions.getMe();
   }
 
   componentWillUnmount() {
@@ -37,6 +38,10 @@ class Navbar extends React.Component {
   }
 
   render() {
+      var user = <div><Link to="/auth/signin">Sign In</Link> <Link to="/auth/signup">Sign Up</Link></div>;
+      if (this.state.me) {
+          user = <div>Logged in as <span>{this.state.me}<Link to="/auth/signout">Sign Out</Link></span></div>;
+      }
     return (
       <nav className='navbar navbar-default navbar-static-top'>
         <div className='navbar-header'>
@@ -63,9 +68,7 @@ class Navbar extends React.Component {
           </Link>
         </div>
 
-        <div>
-            User: {this.state.me}
-        </div>
+        {user}
 
       </nav>
     );

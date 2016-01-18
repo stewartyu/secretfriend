@@ -14,6 +14,7 @@ class SignupStore {
   onSignupSuccess(successMessage) {
     this.emailValidationState = 'has-success';
     this.helpBlock = 'You have signed up!';
+    return successMessage;
   }
 
   onSignupFail(errorMessage) {
