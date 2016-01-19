@@ -11,23 +11,27 @@ class NavbarStore {
     this.me = '';
   }
 
-  onSigninSuccess(me) {
-    this.me = me;
-  }
-
-  onSignupSuccess(me) {
-    this.me = me;
-  }
-
-  getMeSuccess(me) {
+  setMe(me) {
     if (Object.keys(me).length === 0) {
       me = '';
     }
     this.me = me;
   }
 
+  onSigninSuccess(me) {
+    this.setMe(me);
+  }
+
+  onSignupSuccess(me) {
+    this.setMe(me);
+  }
+
+  getMeSuccess(me) {
+    this.setMe(me);
+  }
+
   onSignoutSuccess() {
-    this.me = '';
+    this.setMe('');
   }
 }
 

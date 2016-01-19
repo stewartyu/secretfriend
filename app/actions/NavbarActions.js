@@ -20,10 +20,10 @@ class NavbarActions {
   }
 
   signout() {
-      $.ajax({ url: '/auth/signout' })
-        .done((data) => {
-          this.actions.signoutSuccess(data);
-        });
+    $.ajax({ url: '/auth/signout' })
+      .done((data) => {
+        this.actions.signoutSuccess(data);
+    });
   }
 }
 
